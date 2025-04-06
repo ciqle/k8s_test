@@ -1,0 +1,23 @@
+services:
+  frontend:
+    build: .
+    command: python3 server.py
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1  # 禁用Python的字节码缓存
+    ports:
+      - "8080:80"
+
+
+# PYTHONDONTWRITEBYTECODE: 1 这个环境变量设置是用来禁止 Python 生成 .pyc 文件（字节码缓存文件）的。
+
+# 具体作用如下：
+
+# 1. 当设置为 1 时，Python 不会将编译后的字节码写入磁盘，即不会生成 .pyc 文件或 __pycache__ 目录
+# 2. 这在开发环境中特别有用，可以避免在宿主机和容器之间共享卷时出现权限问题或缓存不一致的问题
+# 3. 可以保持项目目录的整洁，不会出现大量的缓存文件
+# 4. 在开发过程中修改代码时，不必担心旧的字节码缓存导致的问题
+# 在开发环境中启用这个选项是一个良好实践，特别是当你使用卷挂载（如此处的 volumes 配置）将宿主机目录映射到容器内时，可以避免在宿主机上生成不必要的 .pyc 文件。不过在生产环境中，通常会允许生成字节码文件以提高性能。

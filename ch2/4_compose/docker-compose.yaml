@@ -1,0 +1,6 @@
+services:
+  web:                          # 定义一个名为"web"的服务
+    build: ../3_timeserver      # 指定构建上下文目录，Docker会使用该目录下的Dockerfile来构建镜像
+    command: python3 server.py  # 指定容器启动时执行的命令
+    ports:
+      - "8080:80"

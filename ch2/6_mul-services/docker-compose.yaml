@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build: ../3_timeserver
+    command: python3 server.py
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1
+    ports:
+      - "8080:80"
+  
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+volumes:
+    db_data:

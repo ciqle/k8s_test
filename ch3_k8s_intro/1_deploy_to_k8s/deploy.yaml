@@ -15,3 +15,5 @@ spec:                 # 规范部分，定义所需的部署状态
       containers:     # 容器列表，Pod中包含的容器
       - name: timeserver-container  # 容器名称
         image: docker.io/wdenniss/timeserver:1  # 容器镜像，指定使用哪个Docker镜像及其版本
+
+# Deployment的spec需要指定一个完整的Pod，其中包括metadata和spec

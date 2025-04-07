@@ -1,0 +1,59 @@
+kubectl describe pod timeserver-fbb58684d-52q76
+
+-------------------------------------------------------------
+
+Name:             timeserver-fbb58684d-52q76
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             orbstack/198.19.249.2
+Start Time:       Sun, 06 Apr 2025 23:47:27 +0800
+Labels:           pod=timeserver-pod
+                  pod-template-hash=fbb58684d
+Annotations:      <none>
+Status:           Running
+IP:               192.168.194.7
+IPs:
+  IP:           192.168.194.7
+  IP:           fd07:b51a:cc66:a::7
+Controlled By:  ReplicaSet/timeserver-fbb58684d
+Containers:
+  timeserver-container:
+    Container ID:   docker://a3c45c303c38901db818ebbea38be56901a68c43a782a1ba11d2b9dcb2fa7c36
+    Image:          docker.io/wdenniss/timeserver:1
+    Image ID:       docker-pullable://wdenniss/timeserver@sha256:dd0a3ac084e7e2e0e1a411425ccfc84f4c130985f1caeb91e5278c23e05788db
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sun, 06 Apr 2025 23:49:03 +0800
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-rv7zp (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-rv7zp:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  18m   default-scheduler  Successfully assigned default/timeserver-fbb58684d-52q76 to orbstack
+  Normal  Pulling    18m   kubelet            Pulling image "docker.io/wdenniss/timeserver:1"
+  Normal  Pulled     16m   kubelet            Successfully pulled image "docker.io/wdenniss/timeserver:1" in 1m35.694s (1m35.694s including waiting). Image size: 1016243044 bytes.
+  Normal  Created    16m   kubelet            Created container timeserver-container
+  Normal  Started    16m   kubelet            Started container timeserver-container

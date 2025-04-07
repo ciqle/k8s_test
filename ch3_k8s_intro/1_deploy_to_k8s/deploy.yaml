@@ -1,0 +1,17 @@
+apiVersion: apps/v1   # API版本，指定使用Kubernetes API的哪个版本
+kind: Deployment      # 资源类型，这里是Deployment(部署)，用于管理Pod的创建和更新
+metadata:             # 元数据部分，包含标识和组织资源的信息
+  name: timeserver    # yaml所涉及Deployment的名称，可以通过这个名称引用该Deployment
+spec:                 # 规范部分，定义所需的部署状态
+  replicas: 3         # 副本数量，表示要运行的Pod实例数量，这里将运行3个相同的Pod
+  selector:           # 选择器，定义部署如何查找要管理的Pod
+    matchLabels:      # 标签匹配器，使用标签来选择Pod
+      pod: timeserver-pod  # 部署会管理所有带有"pod: timeserver-pod"标签的Pod
+  template:           # Pod模板，定义每个Pod的配置
+    metadata:         # Pod的元数据
+      labels:         # Pod的标签
+        pod: timeserver-pod  # 给Pod添加标签，与上面selector中的匹配标签一致
+    spec:             # Pod规范，定义Pod中的容器
+      containers:     # 容器列表，Pod中包含的容器
+      - name: timeserver-container  # 容器名称
+        image: docker.io/wdenniss/timeserver:1  # 容器镜像，指定使用哪个Docker镜像及其版本

@@ -1,0 +1,21 @@
+# 这是一个Kubernetes Deployment配置文件
+# Kubernetes是一个容器编排平台，用于管理容器化应用程序
+
+apiVersion: apps/v1  # 使用Kubernetes API的版本，apps/v1是Deployment资源的稳定版本
+kind: Deployment     # 资源类型为Deployment，用于创建和管理Pod的多个副本
+metadata:
+  name: timeserver   # Deployment的名称，可以用来引用这个Deployment
+spec:                # Deployment的规格说明
+  replicas: 3        # 指定要运行的Pod副本数量，这里会创建3个相同的Pod
+  selector:          # 选择器，用于Deployment识别它所管理的Pod
+    matchLabels:     # 匹配带有特定标签的Pod
+      pod: timeserver-pod  # 这个Deployment管理所有带有"pod: timeserver-pod"标签的Pod
+  template:          # Pod模板，定义了要创建的Pod的配置
+    metadata:        # Pod的元数据
+      labels:        # Pod的标签
+        pod: timeserver-pod  # 给Pod添加标签，与上面的selector匹配，这样Deployment才能管理它们
+    spec:            # Pod的规格说明
+      containers:    # Pod中的容器列表
+      - name: timeserver-container  # 容器的名称
+        image: docker.io/wdenniss/timeserver:2  # 容器的镜像，这是一个提供时间服务的应用，版本是2
+        # 这个容器运行一个简单的时间服务器应用，可能会返回当前的时间信息
